@@ -7,7 +7,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Repository
@@ -18,15 +17,17 @@ public class AuthorDAOImpl implements AuthorDAO{
     @Autowired
     private SessionFactory sessionFactory;
 
+    private Session session;
+
     @Override
     public void add(Author author) {
-        Session session = sessionFactory.getCurrentSession();
+        session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(author);
     }
 
     @Override
     public List<Author> findAll() {
-        Session session = sessionFactory.getCurrentSession();
+        session = sessionFactory.getCurrentSession();
 
         Query<Author> theQuery = session.createQuery("from Author",Author.class);
 
@@ -35,10 +36,10 @@ public class AuthorDAOImpl implements AuthorDAO{
 
     @Override
     public void deleteById(int id) {
-        Session session = sessionFactory.getCurrentSession();
+        session = sessionFactory.getCurrentSession();
         Query<Author> theQuery = session.createQuery("from Author where id=:author_id",Author.class);
 
-        Author tmp = theQuery.getSingleResult();
+        Author tmp = findById(id);
 
         if(tmp != null) {
             session.delete(tmp);
@@ -48,15 +49,11 @@ public class AuthorDAOImpl implements AuthorDAO{
         }
     }
 
+    public Author findById(int id) {
+        session = sessionFactory.getCurrentSession();
+        Query<Author> theQuery = session.createQuery("from Author where id=:author_id",Author.class);
+        theQuery.setParameter("author_id",id);
 
-    /*public void initAuthors() {
-
-        Author author2 = new Author("Juliusz Slowacki","Pozytywizm");
-        Author author3 = new Author("Ernest Hemingway","Nie wiem");
-
-        this.add(author1);
-        this.add(author2);
-        this.add(author3);
-
-    }*/
+        return theQuery.getSingleResult();
+    }
 }

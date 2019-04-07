@@ -25,9 +25,8 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public void deleteById(int id) {
         session = sessionFactory.getCurrentSession();
-        Query<User> theQuery = session.createQuery("from User where id=:user_id",User.class);
-        theQuery.setParameter("user_id",id);
-        User tmp = theQuery.getSingleResult();
+
+        User tmp = findById(id);
 
         if(tmp != null) {
             session.delete(tmp);
@@ -40,5 +39,14 @@ public class UserDAOImpl implements UserDAO{
         Query<User> theQuery = session.createQuery("from User",User.class);
 
         return theQuery.getResultList();
+    }
+
+    @Override
+    public User findById(int id) {
+        session = sessionFactory.getCurrentSession();
+        Query<User> theQuery = session.createQuery("from User where id=:user_id",User.class);
+        theQuery.setParameter("user_id",id);
+
+        return theQuery.getSingleResult();
     }
 }

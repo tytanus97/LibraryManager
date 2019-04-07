@@ -9,4 +9,5 @@ public interface AuthorDAO {
     void add(Author author);
     List<Author> findAll();
     void deleteById(int id);
+    Author findById(int id);
 }
