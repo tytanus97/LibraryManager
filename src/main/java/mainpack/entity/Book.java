@@ -44,6 +44,14 @@ public class Book {
         this.amount = amount;
     }
 
+    public Book(String title, Author author, String description,int amount,List<User> userList) {
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.amount = amount;
+        this.userList = userList;
+    }
+
     public int getId() {
         return id;
     }

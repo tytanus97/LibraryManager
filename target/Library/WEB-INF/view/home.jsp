@@ -14,6 +14,7 @@
         <td><c:out value="${author.name}"/></td>
         <td><c:out value="${author.style}"/></td>
     </tr>
+<br>
 </c:forEach>
 </body>
 </html>
