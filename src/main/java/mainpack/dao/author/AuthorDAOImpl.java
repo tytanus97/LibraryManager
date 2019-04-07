@@ -37,6 +37,7 @@ public class AuthorDAOImpl implements AuthorDAO{
     public void deleteById(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query<Author> theQuery = session.createQuery("from Author where id=:author_id",Author.class);
+
         Author tmp = theQuery.getSingleResult();
 
         if(tmp != null) {

@@ -1,3 +1,4 @@
+/*
 package mainpack.config;
 
 
@@ -11,8 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -45,3 +46,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 }
 
 
+*/
