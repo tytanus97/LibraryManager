@@ -44,8 +44,4 @@ public class TestController {
         return "redirect:findAll";
     }
 
-    @GetMapping("/showLoginPage")
-    public String getLoginForm(Model model) {
-        return "loginPage";
-    }
 }
