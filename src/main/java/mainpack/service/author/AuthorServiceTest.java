@@ -9,5 +9,6 @@ public interface AuthorServiceTest {
     void add(Author author);
     List<Author> findAll();
     void deleteById(int id);
+    Author findByName(String name);
 
 }

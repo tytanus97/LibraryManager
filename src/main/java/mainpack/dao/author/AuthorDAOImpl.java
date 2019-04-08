@@ -1,6 +1,7 @@
 package mainpack.dao.author;
 
 import mainpack.entity.Author;
+import mainpack.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -54,6 +55,14 @@ public class AuthorDAOImpl implements AuthorDAO{
         Query<Author> theQuery = session.createQuery("from Author where id=:author_id",Author.class);
         theQuery.setParameter("author_id",id);
 
+        return theQuery.getSingleResult();
+    }
+
+    @Override
+    public Author findByName(String name) {
+        session = sessionFactory.getCurrentSession();
+        Query<Author> theQuery = session.createQuery("from Author where name=:authorName",Author.class);
+        theQuery.setParameter("authorName",name);
         return theQuery.getSingleResult();
     }
 }

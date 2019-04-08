@@ -1,6 +1,7 @@
 package mainpack.dao.book;
 
 import mainpack.entity.Book;
+import mainpack.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -46,6 +47,14 @@ public class BookDAOImpl implements BookDAO {
         session = sessionFactory.getCurrentSession();
         Query<Book> theQuery = session.createQuery("from Book where id=:book_id",Book.class);
         theQuery.setParameter("book_id",id);
+        return theQuery.getSingleResult();
+    }
+
+    @Override
+    public Book findByTitle(String title) {
+        session = sessionFactory.getCurrentSession();
+        Query<Book> theQuery = session.createQuery("from Book where title=:bookTitle",Book.class);
+        theQuery.setParameter("bookTitle",title);
         return theQuery.getSingleResult();
     }
 }

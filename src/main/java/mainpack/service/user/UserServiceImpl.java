@@ -35,4 +35,10 @@ public class UserServiceImpl implements UserService{
 
         return userDAO.findAll();
     }
+
+    @Transactional
+    @Override
+    public User findByName(String userName) {
+        return userDAO.findByName(userName);
+    }
 }

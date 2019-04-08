@@ -10,4 +10,5 @@ public interface BookService {
     void saveOrUpdate(Book book);
     void deleteById(int id);
     Book findById(int id);
+    Book findByTitle(String title);
 }
