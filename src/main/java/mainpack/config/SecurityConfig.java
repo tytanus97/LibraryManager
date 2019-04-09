@@ -20,13 +20,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CustomAuthenticationSuccesHandler customAuthenticationSuccesHandler;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         super.configure(auth);
 
-        auth.inMemoryAuthentication().withUser(User.builder().username("tytanus97")
-                                    .password("pawelos105").roles("ADMIN"));
 
+        auth.authenticationProvider(daoAuthenticationProvider());
+        System.out.println("dobrze");
     }
 
     @Override
@@ -34,14 +37,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         super.configure(http);
 
         http.authorizeRequests()
-                .anyRequest()
-                .authenticated()
-                .antMatchers("/**").hasRole("ADMIN")
+                .antMatchers("/**").hasAnyRole("ADMIN","EMPLOYEE")
+                .antMatchers("/").hasAnyRole("ADMIN","EMPLOYEE")
                 .and()
+                .csrf()
+                .disable()
                 .formLogin()
-                .loginPage("/showLoginPage")
+                .loginPage("/showLoginForm")
                 .loginProcessingUrl("/authenticateTheUser")
-                .permitAll();
+                .successHandler(customAuthenticationSuccesHandler)
+                .failureUrl("/failure")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/showLogoutPage")
+                .permitAll()
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/acces-danied");
+
     }
 
 

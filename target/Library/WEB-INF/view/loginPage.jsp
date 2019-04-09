@@ -1,9 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 
-<!doctype html>
 <html lang="en">
-
 <head>
 
     <title>Login Page</title>
@@ -21,7 +20,8 @@
 </head>
 
 <body>
-
+<h1>Application Context <c:out value="${pageContext.request.contextPath}"/></h1><br>
+<h1>Application Context ${pageContext.request.contextPath} </h1>
 <div>
 
     <div id="loginbox" style="margin-top: 50px;"
@@ -36,8 +36,8 @@
             <div style="padding-top: 30px" class="panel-body">
 
                 <!-- Login Form -->
-                <form action="${pageContext.request.contextPath}/authenticateTheUser"
-                      method="POST" class="form-horizontal">
+                <form:form action="${pageContext.request.contextPath}/authenticateTheUser"
+                           method="POST" class="form-horizontal">
 
                     <!-- Place for messages: error, alert etc ... -->
                     <div class="form-group">
@@ -49,20 +49,16 @@
                                 <c:if test="${param.error != null}">
 
                                     <div class="alert alert-danger col-xs-offset-1 col-xs-10">
-                                        Invalid username and password.
+                                        Invalid username or password.
                                     </div>
 
                                 </c:if>
 
-                                <!-- Check for logout -->
-
-                                <c:if test="${param.logout != null}">
-
-                                    <div class="alert alert-success col-xs-offset-1 col-xs-10">
-                                        You have been logged out.
-                                    </div>
-
-                                </c:if>
+                                <!--
+                                <div class="alert alert-success col-xs-offset-1 col-xs-10">
+                                    You have been logged out.
+                                </div>
+                                -->
 
                             </div>
                         </div>
@@ -89,20 +85,14 @@
                         </div>
                     </div>
 
-                    <!-- I'm manually adding tokens ... Bro! -->
-
-                    <input type="hidden"
-                           name="${_csrf.parameterName}"
-                           value="${_csrf.token}" />
-
-                </form>
+                </form:form>
 
             </div>
 
         </div>
 
         <div>
-            <a href="${pageContext.request.contextPath}/register/showRegistrationForm" class="btn btn-primary" role="button" aria-pressed="true">Register New User</a>
+           <!-- <a href="${pageContext.request.contextPath}/register/showRegistrationForm" class="btn btn-primary" role="button" aria-pressed="true">Register New User</a> !-->
         </div>
 
     </div>

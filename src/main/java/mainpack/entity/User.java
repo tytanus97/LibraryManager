@@ -2,6 +2,7 @@ package mainpack.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -23,33 +24,49 @@ public class User {
     @Column(name="email")
     private String email;
 
-    @Column(name="role")
-    private String role;
-
     @ManyToMany(fetch = FetchType.LAZY,
                 cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(name="user_book",joinColumns = @JoinColumn(name="user_id")
                                ,inverseJoinColumns = @JoinColumn(name="book_id"))
     private List<Book> bookList;
 
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Collection<Role> roles;
+
     public User() {
 
     }
 
-    public User(String username, String password, String email, String role) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.role = role;
-
     }
 
-    public User(String username, String password, String email, String role, List<Book> bookList) {
+    public User(String username, String password, String email,Collection<Role> roles) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.role = role;
+        this.roles = roles;
+    }
+
+    public User(String username, String password, String email,List<Book> bookList) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
         this.bookList = bookList;
+    }
+
+    public User(String username, String password, String email,Collection<Role> roles,List<Book> bookList) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.bookList = bookList;
+        this.roles = roles;
     }
 
     public int getId() {
@@ -84,13 +101,6 @@ public class User {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public List<Book> getBookList() {
         return bookList;
@@ -111,6 +121,14 @@ public class User {
         book.addUser(this);
     }
 
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -118,7 +136,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
+                ", roles='" + roles +
                 ", bookList=" + bookList +
                 '}';
     }

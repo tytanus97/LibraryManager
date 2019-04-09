@@ -24,7 +24,7 @@ public class UserController {
         List<User> userList = userService.findAll();
 
         model.addAttribute("users",userList);
-        return "home";
+        return "index";
     }
 
 

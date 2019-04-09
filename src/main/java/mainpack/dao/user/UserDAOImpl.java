@@ -5,8 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,7 +16,7 @@ public class UserDAOImpl implements UserDAO{
     private SessionFactory sessionFactory;
     private Session session;
 
-    @Override
+
     public void save(User user) {
         session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(user);
@@ -59,10 +57,4 @@ public class UserDAOImpl implements UserDAO{
         return theQuery.getSingleResult();
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-
-
-        return null;
-    }
 }

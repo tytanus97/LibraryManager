@@ -8,7 +8,7 @@
 <body>
 <h1>asdasfasdfasdfasd</h1>
 
-<c:forEach var = "author" items = "${duppa}" >
+<%--<c:forEach var = "author" items = "${duppa}" >
     <tr>
         <td><c:out value="${author.id}" /></td>
         <td><c:out value="${author.name}"/></td>
@@ -25,6 +25,6 @@
     <td><c:out value="${user.role}"/></td>
 </tr>
 <br>
-</c:forEach>
+</c:forEach>--%>
 </body>
 </html>

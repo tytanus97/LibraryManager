@@ -22,7 +22,7 @@ public class TestController {
     private UserService userService;
 
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String home(Model model) {
 
         List<Author> tmp = authorServiceTest.findAll();
@@ -35,13 +35,13 @@ public class TestController {
 
         model.addAttribute("users",userList);
 
-        return "home";
+        return "index";
     }
 
     @GetMapping("/add")
     public String addSome() {
 
-        return "redirect:findAll";
+        return "redirect:/";
     }
 
 }
