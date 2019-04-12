@@ -24,7 +24,7 @@ public class User {
     @Column(name="email")
     private String email;
 
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.EAGER,
                 cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(name="user_book",joinColumns = @JoinColumn(name="user_id")
                                ,inverseJoinColumns = @JoinColumn(name="book_id"))

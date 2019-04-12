@@ -1,0 +1,47 @@
+#logout {
+    margin-left:20%;
+    float:  left;
+    margin-top:1%;
+}
+#userDetails {
+    margin-left:20%;
+    float:  left;
+    margin-top:1%;
+}
+body {
+    background-color: #05194C;
+}
+#mybooks {
+    margin-left:20%;
+    float:left;
+    color:wheat;
+}
+
+section {
+
+    clear:both;
+    float:left;
+    width:80%;
+    margin-top:10%;
+    margin-left:10%;
+    color:white;
+}
+.btn.btn-secondary {
+    color:black;
+}
+
+.book-row:hover {
+    background-color: #030A91;
+}
+#back {
+    margin-left:20%;
+    float:  left;
+    margin-top:1%;
+}
+
+#booklistempty {
+    margin-left: 35%;
+    color:wheat;
+
+}
+

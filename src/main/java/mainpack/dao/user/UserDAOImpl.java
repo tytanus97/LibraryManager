@@ -36,9 +36,11 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public List<User> findAll() {
         session = sessionFactory.getCurrentSession();
-        Query<User> theQuery = session.createQuery("from User",User.class);
+        Query<User> theQuery = session.createQuery("select distinct a from User a join fetch a.roles",User.class);
+        List<User> userList = theQuery.getResultList();
 
-        return theQuery.getResultList();
+
+        return userList;
     }
 
     @Override

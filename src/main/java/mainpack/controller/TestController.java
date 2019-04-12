@@ -1,9 +1,9 @@
 package mainpack.controller;
 
 
-import mainpack.entity.Author;
-import mainpack.entity.User;
+import mainpack.entity.Book;
 import mainpack.service.author.AuthorServiceTest;
+import mainpack.service.book.BookService;
 import mainpack.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,26 +22,19 @@ public class TestController {
     private UserService userService;
 
 
+    @Autowired
+    private BookService bookService;
+
+
     @GetMapping("/")
     public String home(Model model) {
 
-        List<Author> tmp = authorServiceTest.findAll();
-        for (Author auth:tmp) {
-            System.out.println(auth.toString());
-        }
-        model.addAttribute("duppa",tmp);
+       List<Book> bookList = bookService.findAll();
 
-        List<User> userList = userService.findAll();
-
-        model.addAttribute("users",userList);
+       model.addAttribute("books",bookList);
 
         return "index";
     }
 
-    @GetMapping("/add")
-    public String addSome() {
-
-        return "redirect:/";
-    }
 
 }

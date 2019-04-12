@@ -1,7 +1,11 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page isELIgnored="false" %>
 
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -9,20 +13,32 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Reference Bootstrap files -->
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <link type="text/css" href='<spring:url value="/resources/css/style2.css"/>' rel="stylesheet" >
 
-    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
 
+        body {
+            background-color: #05194C;
+        }
+
+        section {
+            clear:both;
+            float:left;
+            width:80%;
+            margin-left:25%;
+            color:white;
+
+        }
+
+    </style>
 </head>
 
 <body>
-<h1>Application Context <c:out value="${pageContext.request.contextPath}"/></h1><br>
-<h1>Application Context ${pageContext.request.contextPath} </h1>
-<div>
+
+<section>
 
     <div id="loginbox" style="margin-top: 50px;"
          class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
@@ -47,18 +63,19 @@
                                 <!-- Check for login error -->
 
                                 <c:if test="${param.error != null}">
-
                                     <div class="alert alert-danger col-xs-offset-1 col-xs-10">
                                         Invalid username or password.
                                     </div>
 
                                 </c:if>
 
-                                <!--
+                                <c:if test="${param.logout != null}">
                                 <div class="alert alert-success col-xs-offset-1 col-xs-10">
                                     You have been logged out.
                                 </div>
-                                -->
+
+                                </c:if>
+
 
                             </div>
                         </div>
@@ -97,8 +114,7 @@
 
     </div>
 
-</div>
+</section>
 
 </body>
-</html>
 </html>

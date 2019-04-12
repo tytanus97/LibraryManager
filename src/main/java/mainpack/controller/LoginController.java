@@ -16,7 +16,7 @@ public class LoginController {
 
     @GetMapping("/acces-danied")
     public String accesDanied() {
-        return "accesDaniedPage";
+        return "loginPage";
     }
 
 
@@ -27,9 +27,12 @@ public class LoginController {
         return "index";
     }
 
-    @GetMapping("/failure")
-    public void fail() {
-        System.out.println("DUPPA");
+
+    @GetMapping("/showLogoutPage")
+    public String logoutPage() {
+
+        return "loginPage";
+
     }
 
 }

@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
@@ -40,17 +39,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").hasAnyRole("ADMIN","EMPLOYEE")
                 .antMatchers("/").hasAnyRole("ADMIN","EMPLOYEE")
                 .and()
-                .csrf()
-                .disable()
                 .formLogin()
                 .loginPage("/showLoginForm")
                 .loginProcessingUrl("/authenticateTheUser")
                 .successHandler(customAuthenticationSuccesHandler)
-                .failureUrl("/failure")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/showLogoutPage")
                 .permitAll()
                 .and()
                 .exceptionHandling()

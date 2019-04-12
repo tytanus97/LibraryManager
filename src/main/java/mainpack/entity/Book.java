@@ -18,7 +18,7 @@ public class Book {
     private String title;
 
     @ManyToOne(cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}
-                        ,fetch=FetchType.LAZY)
+                        ,fetch=FetchType.EAGER)
     @JoinColumn(name="author_id")
     private Author author;
 
