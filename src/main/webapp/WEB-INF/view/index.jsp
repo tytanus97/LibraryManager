@@ -50,7 +50,7 @@
                 <td>${book.author.name}</td>
                 <td>${book.description}</td>
                 <td>${book.amount}</td>
-                <td><button  class="btn btn-secondary">Details</button><button class="btn btn-warning">Borrow</button></td>
+                <td><button  class="btn btn-secondary">Details</button><button class="btn btn-success">Borrow</button></td>
             </tr>
         </c:forEach>
         </tbody>
