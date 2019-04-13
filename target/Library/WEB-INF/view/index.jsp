@@ -23,10 +23,10 @@
         <c:param name="userName" value="${pageContext.request.userPrincipal.name}"/>
     </c:url>
 
-    <h3 id="mybooks">My books</h3>
+    <h3 id="mybooks"><security:authentication property='principal.username'/></h3>
 
     <form:form method="POST" action="${showUserDetails}">
-        <input type="submit" id="userDetails" class="btn btn-warning" value="<security:authentication property='principal.username'/>"/>
+        <input type="submit" id="userDetails" class="btn btn-warning" value="My details"/>
     </form:form>
 
 

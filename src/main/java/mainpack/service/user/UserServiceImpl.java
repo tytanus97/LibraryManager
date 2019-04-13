@@ -1,5 +1,7 @@
 package mainpack.service.user;
 
+import mainpack.crm.user.CrmUser;
+import mainpack.dao.role.RoleDao;
 import mainpack.dao.user.UserDAO;
 import mainpack.entity.Role;
 import mainpack.entity.User;
@@ -8,10 +10,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +27,11 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private RoleDao roleDao;
 
     @Transactional
     @Override
@@ -43,9 +52,24 @@ public class UserServiceImpl implements UserService{
         return userDAO.findByName(userName);
     }
 
+    @Transactional
     @Override
-    public void save(User user) {
+    public void save(CrmUser crmUser) {
+
+        User user = new User();
+        user.setUsername(crmUser.getUserName());
+        user.setPassword(bCryptPasswordEncoder.encode(crmUser.getPassword()));
+        user.setBookList(null);
+        user.setEmail(crmUser.getEmail());
+        user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")));
+
         userDAO.save(user);
+    }
+
+    @Transactional
+    @Override
+    public User findByEmail(String email) {
+        return userDAO.findByEmail(email);
     }
 
     @Transactional

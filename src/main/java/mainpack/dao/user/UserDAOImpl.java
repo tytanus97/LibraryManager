@@ -37,10 +37,8 @@ public class UserDAOImpl implements UserDAO{
     public List<User> findAll() {
         session = sessionFactory.getCurrentSession();
         Query<User> theQuery = session.createQuery("select distinct a from User a join fetch a.roles",User.class);
-        List<User> userList = theQuery.getResultList();
 
-
-        return userList;
+        return theQuery.getResultList();
     }
 
     @Override
@@ -56,7 +54,25 @@ public class UserDAOImpl implements UserDAO{
         session = sessionFactory.getCurrentSession();
         Query<User> theQuery = session.createQuery("from User where username=:userName",User.class);
         theQuery.setParameter("userName",userName);
-        return theQuery.getSingleResult();
+        try {
+            return theQuery.getSingleResult();
+        }
+        catch(Exception exc) {
+            return null;
+        }
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        session = sessionFactory.getCurrentSession();
+
+        Query<User> theQuery = session.createQuery("from User where email=:emailaddress",User.class);
+        theQuery.setParameter("emailaddress",email);
+        try {
+            return theQuery.getSingleResult();
+        }catch(Exception exc) {
+            return null;
+        }
     }
 
 }

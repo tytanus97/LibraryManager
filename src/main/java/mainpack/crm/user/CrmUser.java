@@ -1,5 +1,6 @@
 package mainpack.crm.user;
 
+import mainpack.validation.EmailValidator;
 import mainpack.validation.FieldMatch;
 
 import javax.validation.constraints.NotNull;
@@ -11,20 +12,21 @@ import javax.validation.constraints.Size;
 public class CrmUser {
 
 
-    @NotNull(message = "is required")
-    @Size(min = 1, message = "is required")
+    @NotNull(message = "Username is required")
+    @Size(min = 1, message = "Username is required")
     private String userName;
 
-    @NotNull(message = "is required")
-    @Size(min = 1, message = "is required")
+    @NotNull(message = "Password is required")
+    @Size(min = 1, message = "Passowrd is required")
     private String password;
 
-    @NotNull(message = "is required")
-    @Size(min = 1, message = "is required")
+    @NotNull(message = "Password is required")
+    @Size(min = 1, message = "Password is required")
     private String matchingPassword;
 
-    @NotNull(message = "is required")
-    @Size(min = 1, message = "is required")
+    @EmailValidator
+    @NotNull(message = "Email is required")
+    @Size(min = 1, message = "Email is required")
     private String email;
 
     public CrmUser() {

@@ -108,8 +108,11 @@
 
         </div>
 
-        <div>
-           <!-- <a href="${pageContext.request.contextPath}/register/showRegistrationForm" class="btn btn-primary" role="button" aria-pressed="true">Register New User</a> !-->
+        <form:form method="GET" action="${pageContext.request.contextPath}/registration/showRegistrationForm">
+
+            <input type="submit" class="btn btn-primary" role="button" value = "Register new user" aria-pressed="true">
+
+        </form:form>
         </div>
 
     </div>
