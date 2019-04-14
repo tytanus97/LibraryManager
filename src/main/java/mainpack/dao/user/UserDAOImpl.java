@@ -44,7 +44,7 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public User findById(int id) {
         session = sessionFactory.getCurrentSession();
-        Query<User> theQuery = session.createQuery("from User where id=:user_id",User.class);
+        Query<User> theQuery = session.createQuery("select distinct u from User u left join fetch u.bookList where u.id=:user_id",User.class);
         theQuery.setParameter("user_id",id);
         return theQuery.getSingleResult();
     }
@@ -52,7 +52,7 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public User findByName(String userName) {
         session = sessionFactory.getCurrentSession();
-        Query<User> theQuery = session.createQuery("from User where username=:userName",User.class);
+        Query<User> theQuery = session.createQuery("select distinct u from User u left join fetch u.bookList where u.username=:userName",User.class);
         theQuery.setParameter("userName",userName);
         try {
             return theQuery.getSingleResult();

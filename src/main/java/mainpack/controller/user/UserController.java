@@ -1,8 +1,10 @@
 package mainpack.controller.user;
 
 
+import mainpack.controller.TestController;
 import mainpack.entity.Book;
 import mainpack.entity.User;
+import mainpack.service.book.BookService;
 import mainpack.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -25,6 +27,13 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TestController testController;
+
+    @Autowired
+    private BookService bookService;
+
 
     @GetMapping("/findAll")
     public String listAll(Model model) {
@@ -54,8 +63,57 @@ public class UserController {
     }
 
     @PostMapping("/saveOrUpdate")
-    public String showUserDetails(Model model) {
+    public String showUserDetails() {
 
         return "userDetail";
+    }
+
+    @PostMapping("/addBook")
+    public String addBook(@RequestParam("userName")String userName,@RequestParam("bookId")int bookId,Model model) {
+
+
+        System.out.println(userName);
+        boolean userContainsBook = false;
+        //retrive user from data base by userName;
+        User user = userService.findByName(userName);
+
+        //retrive book from database by book id;
+
+        Book book = bookService.findById(bookId);
+
+        //add book to user book list
+       /* for (Book userBook:user.getBookList()) {
+            if(userBook.getId() == book.getId())
+            {
+                userContainsBook = true;
+                break;
+            }
+        }
+
+        if(!userContainsBook) {
+            user.addBook(book);
+        }*/
+
+        user.addBook(book);
+
+        book.setAmount(book.getAmount()-1);
+
+        //update book and user to database
+        System.out.println("trying to update book and user");
+
+        userService.save(user);
+        System.out.println("user updated");
+
+        bookService.saveOrUpdate(book);
+        System.out.println("book updated");
+
+
+
+       /* List<Book> bookList = bookService.findAll();
+        model.addAttribute()
+        testController.home(model);*/
+
+       return "redirect:/";
+
     }
 }

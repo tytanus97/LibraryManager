@@ -54,6 +54,13 @@ public class UserServiceImpl implements UserService{
 
     @Transactional
     @Override
+    public void save(User user) {
+
+        userDAO.save(user);
+    }
+
+    @Transactional
+    @Override
     public void save(CrmUser crmUser) {
 
         User user = new User();

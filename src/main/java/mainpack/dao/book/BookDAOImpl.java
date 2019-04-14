@@ -45,7 +45,8 @@ public class BookDAOImpl implements BookDAO {
     @Override
     public Book findById(int id) {
         session = sessionFactory.getCurrentSession();
-        Query<Book> theQuery = session.createQuery("from Book where id=:book_id",Book.class);
+        System.out.println("Trying to execute query");
+        Query<Book> theQuery = session.createQuery("from Book b left join fetch b.userList where b.id=:book_id ",Book.class);
         theQuery.setParameter("book_id",id);
         return theQuery.getSingleResult();
     }

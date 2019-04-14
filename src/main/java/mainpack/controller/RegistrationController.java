@@ -69,6 +69,7 @@ public class RegistrationController {
 
         userService.save(crmUser);
         System.out.println("user registered successfully");
+        model.addAttribute("registerSuccess","Registration completed successfully");
         return "registrationConfirmation";
     }
 }

@@ -62,6 +62,14 @@
 
                                 <!-- Check for login error -->
 
+                                <c:if test="${registerSuccess != null}">
+
+                                    <div class="alert alert-success col-xs-offset-1 col-xs-10">
+                                        ${registerSuccess}
+                                    </div>
+                                </c:if>
+
+
                                 <c:if test="${param.error != null}">
                                     <div class="alert alert-danger col-xs-offset-1 col-xs-10">
                                         Invalid username or password.

@@ -31,9 +31,9 @@
 
 
 </nav>
-<section>
+<section class="table-wrapper-scroll-y my-custom-scrollbar">
     <h2>Available books</h2>
-    <table class="table">
+    <table class="table table-sm">
         <thead>
         <tr>
             <th scope="col">Title</th>
@@ -45,12 +45,18 @@
         </thead>
         <tbody>
         <c:forEach var="book" items="${books}">
+            <c:url var="addBookToUser" value="/user/addBook">
+                <c:param name="userName" value="${pageContext.request.userPrincipal.name}"/>
+                <c:param name="bookId" value="${book.id}"/>
+            </c:url>
             <tr class="book-row">
                 <td>${book.title}</td>
                 <td>${book.author.name}</td>
                 <td>${book.description}</td>
                 <td>${book.amount}</td>
-                <td><button  class="btn btn-secondary">Details</button><button class="btn btn-success">Borrow</button></td>
+                <td><form:form action="${addBookToUser}" method ="POST">
+                    <input type = "submit" class="btn btn-secondary" value="Borrow"/>
+                    </form:form><button class="btn btn-success">Borrow</button></td>
             </tr>
         </c:forEach>
         </tbody>

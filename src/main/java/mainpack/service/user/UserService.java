@@ -12,6 +12,7 @@ public interface UserService extends UserDetailsService {
     List<User> findAll();
     User findByName(String userName);
     void save(CrmUser user);
+    void save(User user);
     User findByEmail(String email);
 
 

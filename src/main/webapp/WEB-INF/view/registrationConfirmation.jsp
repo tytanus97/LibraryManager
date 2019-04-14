@@ -1,16 +1,29 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: pawel
-  Date: 13.04.19
-  Time: 16:26
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
+    <title>Registration successfull</title>
+    <meta http-equiv="refresh" content="3;url=/Library_war/showLoginForm">
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        h2 {
+            color:chartreuse;
+            margin-left:40%;
+        }
+        h2:hover {
+            color:lawngreen;
+        }
+
+        body {
+            background-color: #05194C;
+        }
+    </style>
 </head>
 <body>
 
+<div class="panel-title"><h2>Registration completed successfully</h2></div>
+
 </body>
+
 </html>
