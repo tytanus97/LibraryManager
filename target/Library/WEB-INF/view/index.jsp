@@ -23,7 +23,7 @@
         <c:param name="userName" value="${pageContext.request.userPrincipal.name}"/>
     </c:url>
 
-    <h3 id="mybooks"><security:authentication property='principal.username'/></h3>
+    <h3 id="mybooks">Logged in as: <security:authentication property='principal.username'/></h3>
 
     <form:form method="POST" action="${showUserDetails}">
         <input type="submit" id="userDetails" class="btn btn-warning" value="My details"/>
@@ -40,7 +40,8 @@
             <th scope="col">Author</th>
             <th scope="col">Description</th>
             <th scope="col">Amount</th>
-            <th scope="col">Action</th>
+            <th scope="col">Borrow</th>
+            <th scope="col">Details</th>
         </tr>
         </thead>
         <tbody>
@@ -49,14 +50,26 @@
                 <c:param name="userName" value="${pageContext.request.userPrincipal.name}"/>
                 <c:param name="bookId" value="${book.id}"/>
             </c:url>
+            <c:url var="bookDetails" value="/book/details">
+                <c:param name="bookId" value="${book.id}"/>
+            </c:url>
             <tr class="book-row">
                 <td>${book.title}</td>
                 <td>${book.author.name}</td>
                 <td>${book.description}</td>
                 <td>${book.amount}</td>
                 <td><form:form action="${addBookToUser}" method ="POST">
-                    <input type = "submit" class="btn btn-secondary" value="Borrow"/>
-                    </form:form><button class="btn btn-success">Borrow</button></td>
+                    <input type = "submit" class="btn btn-secondary" value="Borrow">
+                    </form:form>
+                    <c:if test="${bookInBookList != null}">
+                    <script>alert("${bookInBookList}")</script>
+                    ${bookInBookList = null}
+                    </c:if>
+                </td>
+                <td>
+                    <form:form action="${bookDetails}" method="POST">
+                        <input type="submit" class="btn btn-success" value="Details"/>
+                    </form:form></td>
             </tr>
         </c:forEach>
         </tbody>

@@ -32,7 +32,6 @@ public class TestController {
        List<Book> bookList = bookService.findAll();
 
        model.addAttribute("books",bookList);
-
         return "index";
     }
 

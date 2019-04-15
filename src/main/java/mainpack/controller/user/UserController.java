@@ -7,16 +7,12 @@ import mainpack.entity.User;
 import mainpack.service.book.BookService;
 import mainpack.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import sun.plugin.liveconnect.SecurityContextHelper;
 
 import java.util.List;
 
@@ -82,7 +78,7 @@ public class UserController {
         Book book = bookService.findById(bookId);
 
         //add book to user book list
-       /* for (Book userBook:user.getBookList()) {
+        for (Book userBook:user.getBookList()) {
             if(userBook.getId() == book.getId())
             {
                 userContainsBook = true;
@@ -92,28 +88,21 @@ public class UserController {
 
         if(!userContainsBook) {
             user.addBook(book);
-        }*/
+            book.setAmount(book.getAmount()-1);
 
-        user.addBook(book);
+            userService.save(user);
+            System.out.println("user updated");
 
-        book.setAmount(book.getAmount()-1);
+            bookService.saveOrUpdate(book);
+            System.out.println("book updated");
+        }
+        else {
+            model.addAttribute("bookInBookList","You can't borrow this book twice");
+        }
+        List<Book> bookList = bookService.findAll();
+        model.addAttribute("books",bookList);
 
-        //update book and user to database
-        System.out.println("trying to update book and user");
-
-        userService.save(user);
-        System.out.println("user updated");
-
-        bookService.saveOrUpdate(book);
-        System.out.println("book updated");
-
-
-
-       /* List<Book> bookList = bookService.findAll();
-        model.addAttribute()
-        testController.home(model);*/
-
-       return "redirect:/";
+       return "index";
 
     }
 }

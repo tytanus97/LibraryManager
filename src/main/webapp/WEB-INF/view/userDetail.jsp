@@ -39,18 +39,25 @@
             <th scope="col">Title</th>
             <th scope="col">Author</th>
             <th scope="col">Description</th>
-            <th scope="col">Action</th>
+            <th scope="col">Details</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="book" items="${userBookList}">
+            <c:url var="bookDetails" value="/book/details">
+                <c:param name="bookId" value="${book.id}"/>
+            </c:url>
 
             <tr class="book-row">
 
                 <td>${book.title}</td>
                 <td>${book.author.name}</td>
                 <td>${book.description}</td>
-                <td><button  class="btn btn-secondary">Details</button><button class="btn btn-warning">Return</button></td>
+                <td><form:form action="${bookDetails}" method="POST">
+                    <input type="submit" class="btn btn-success" value="Details"/>
+                </form:form>
+                </td>
+
             </tr>
         </c:forEach>
         </tbody>
