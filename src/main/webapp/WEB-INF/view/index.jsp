@@ -69,7 +69,8 @@
                 <td>
                     <form:form action="${bookDetails}" method="POST">
                         <input type="submit" class="btn btn-success" value="Details"/>
-                    </form:form></td>
+                    </form:form>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

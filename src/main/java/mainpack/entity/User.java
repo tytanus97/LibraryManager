@@ -121,6 +121,21 @@ public class User {
         book.addUser(this);
     }
 
+    public void removeBook(Book book) {
+        if(this.bookList != null) {
+
+            for(int i=0;i<this.bookList.size();i++) {
+                if(this.bookList.get(i).getId() == book.getId())
+                {
+                    this.bookList.remove(i);
+                    break;
+                }
+                else i++;
+            }
+            book.removeUser(this);
+        }
+    }
+
     public Collection<Role> getRoles() {
         return roles;
     }

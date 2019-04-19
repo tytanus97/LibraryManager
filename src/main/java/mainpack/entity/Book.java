@@ -109,6 +109,21 @@ public class Book {
         this.userList.add(user);
     }
 
+    public void removeUser(User user) {
+        if(this.userList != null) {
+
+            for(int i=0;i<this.userList.size();i++) {
+                if(this.userList.get(i).getId() == user.getId()) {
+
+                    this.userList.remove(i);
+                    break;
+
+                }else i++;
+            }
+        }
+
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -118,4 +133,6 @@ public class Book {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+
 }

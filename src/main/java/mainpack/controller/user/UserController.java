@@ -76,17 +76,8 @@ public class UserController {
         //retrive book from database by book id;
 
         Book book = bookService.findById(bookId);
-
         //add book to user book list
-        for (Book userBook:user.getBookList()) {
-            if(userBook.getId() == book.getId())
-            {
-                userContainsBook = true;
-                break;
-            }
-        }
-
-        if(!userContainsBook) {
+        if(!findBookInUser(user,book)) {
             user.addBook(book);
             book.setAmount(book.getAmount()-1);
 
@@ -104,5 +95,51 @@ public class UserController {
 
        return "index";
 
+    }
+
+
+    @PostMapping("/returnBook")
+    public String returnBook(@RequestParam("userName")String userName,@RequestParam("bookId")int bookId,Model model) {
+
+        System.out.println(userName);
+
+        //retrive user from data base by userName;
+        User user = userService.findByName(userName);
+
+        //retrive book from database by book id;
+        Book book = bookService.findById(bookId);
+        //remove book from user bookList
+        if(findBookInUser(user,book)) {
+            user.removeBook(book);
+
+            book.setAmount(book.getAmount()+1);
+
+            bookService.saveOrUpdate(book);
+            userService.save(user);
+        }
+        else {
+            model.addAttribute("bookNotBorrowed","You haven't borrowed this book yet");
+        }
+
+
+        List<Book> userBookList = user.getBookList();
+        model.addAttribute("userBookList",userBookList);
+        model.addAttribute("user",user);
+
+        return "userDetail";
+    }
+
+
+    private boolean findBookInUser(User user, Book book) {
+        boolean userContainsBook = false;
+
+        for (Book userBook:user.getBookList()) {
+            if(userBook.getId() == book.getId())
+            {
+                userContainsBook = true;
+                break;
+            }
+        }
+        return userContainsBook;
     }
 }

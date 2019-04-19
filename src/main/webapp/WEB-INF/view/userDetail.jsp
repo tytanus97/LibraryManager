@@ -48,6 +48,11 @@
                 <c:param name="bookId" value="${book.id}"/>
             </c:url>
 
+            <c:url var="returnBookFromUser" value="/user/returnBook">
+                <c:param name="userName" value="${pageContext.request.userPrincipal.name}"/>
+                <c:param name="bookId" value="${book.id}"/>
+            </c:url>
+
             <tr class="book-row">
 
                 <td>${book.title}</td>
@@ -56,6 +61,15 @@
                 <td><form:form action="${bookDetails}" method="POST">
                     <input type="submit" class="btn btn-success" value="Details"/>
                 </form:form>
+                </td>
+                <td>
+                <form:form action="${returnBookFromUser}" method="POST">
+                    <input type="submit" class="btn btn-warning" value="Return"/>
+                </form:form>
+                    <c:if test="${bookNotBorrowed != null}">
+                        <script>alert("${bookNotBorrowed}")</script>
+                        ${bookNotBorrowed = null}
+                    </c:if>
                 </td>
 
             </tr>
