@@ -1,5 +1,11 @@
 # LibraryManager
-Simple library manager 
+Simple and very primitve sort of Library Manager.
+Technology Stack
+-Spring MVC
+-Spring Security
+-Hibernate
+-Java 8
+-Maven
 
 ![Alt text](screenshots/login.png?raw=true "Login page")
 
