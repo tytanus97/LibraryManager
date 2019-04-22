@@ -6,6 +6,8 @@ Technology Stack
 -Hibernate
 -Java 8
 -Maven
+-HTML/CSS/Bootstrap
+-JSP
 
 ![Alt text](screenshots/login.png?raw=true "Login page")
 
