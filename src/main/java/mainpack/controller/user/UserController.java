@@ -77,7 +77,7 @@ public class UserController {
 
         Book book = bookService.findById(bookId);
         //add book to user book list
-        if(!findBookInUser(user,book)) {
+        if(!findBookInUser(user,book) && book.getAmount() >0) {
             user.addBook(book);
             book.setAmount(book.getAmount()-1);
 
@@ -88,7 +88,7 @@ public class UserController {
             System.out.println("book updated");
         }
         else {
-            model.addAttribute("bookInBookList","You can't borrow this book twice");
+            model.addAttribute("bookInBookList","You can't borrow this book");
         }
         List<Book> bookList = bookService.findAll();
         model.addAttribute("books",bookList);

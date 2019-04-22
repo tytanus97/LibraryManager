@@ -31,9 +31,9 @@
 
 
 </nav>
-<section class="table-wrapper-scroll-y my-custom-scrollbar">
+<section class="scrollable">
     <h2>Available books</h2>
-    <table class="table table-sm">
+    <table class="table table-fixed">
         <thead>
         <tr>
             <th scope="col">Title</th>

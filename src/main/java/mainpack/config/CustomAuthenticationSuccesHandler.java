@@ -25,7 +25,6 @@ public class CustomAuthenticationSuccesHandler implements AuthenticationSuccessH
                                         Authentication authentication) throws IOException, ServletException {
 
         String userName = authentication.getName();
-        System.out.println("LOGOWANIE POWIODLO SIE!!!!");
         User user = userService.findByName(userName);
 
         HttpSession session = httpServletRequest.getSession();
@@ -39,4 +38,8 @@ public class CustomAuthenticationSuccesHandler implements AuthenticationSuccessH
 
 
     }
+
+
+
+
 }
